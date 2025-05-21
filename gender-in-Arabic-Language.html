@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Arabic Gender: Masculine & Feminine</title>
+    <style>
+        body {
+            background-color: #000;
+            color: gold;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #FFD700;
+            text-align: center;
+        }
+
+        h1 {
+            border-bottom: 2px solid gold;
+            padding-bottom: 15px;
+        }
+
+        .section {
+            border: 1px solid gold;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #111;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid gold;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #222;
+        }
+
+        input[type="text"],
+        select {
+            width: 70%;
+            padding: 10px;
+            margin: 8px 0;
+            background-color: #222;
+            color: gold;
+            border: 1px solid gold;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: gold;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffc800;
+            transform: scale(1.05);
+        }
+
+        nav {
+            margin-bottom: 40px;
+            padding: 15px;
+            background-color: #111;
+            border: 1px solid gold;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            color: gold;
+            text-decoration: none;
+            padding: 8px 15px;
+            font-weight: bold;
+            border: 1px solid gold;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            background-color: gold;
+            color: black;
+        }
+
+        .answer {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .correct {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: lightgreen;
+            border: 1px solid lightgreen;
+        }
+
+        .incorrect {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: lightcoral;
+            border: 1px solid lightcoral;
+        }
+
+        .top-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: gold;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .top-link:hover {
+            text-decoration: underline;
+        }
+
+        .exercise-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .exercise-box {
+            border: 1px solid gold;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #1a1a1a;
+        }
+
+        .hint {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #222;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            background-color: gold;
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .flashcard {
+            width: 300px;
+            height: 200px;
+            margin: 20px auto;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 2px solid gold;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #111;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .irregular-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .exercise-container {
+                grid-template-columns: 1fr;
+            }
+
+            .irregular-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="home">Arabic Grammar: Masculine and Feminine</h1>
+    <nav>
+        <a href="#masculine">🧔 Masculine</a>
+        <a href="#feminine">👩 Feminine</a>
+        <a href="#conversion">🔄 Conversion</a>
+        <a href="#exceptions">⚠️ Exceptions</a>
+        <a href="#practice">✍️ Practice</a>
+    </nav>
+
+    <!-- Introduction Section -->
+    <div class="section">
+        <h2>Introduction to Arabic Gender</h2>
+        <p>In Arabic, every noun is either masculine (مذكر) or feminine (مؤنث). Unlike English, this gender
+            classification applies to all nouns, not just those referring to people.</p>
+
+        <div class="flashcard-container">
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>Masculine Noun</h3>
+                        <p>كتاب (book)</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <p>Gender: Masculine</p>
+                        <p>No special ending</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard" onclick="this.classList.toggle('flipped')">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <h3>Feminine Noun</h3>
+                        <p>سيارة (car)</p>
+                    </div>
+                    <div class="flashcard-back">
+                        <p>Gender: Feminine</p>
+                        <p>Ends with تاء مربوطة (ـة)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Masculine Section -->
+    <div class="section" id="masculine">
+        <h2>🧔 Masculine Gender (المذكر)</h2>
+        <p>Masculine is the default gender in Arabic. Nouns are considered masculine unless they have a specific
+            feminine marker.</p>
+
+        <h3>Characteristics of Masculine Nouns:</h3>
+        <ul>
+            <li>Most nouns without feminine markers are masculine</li>
+            <li>Names of male persons and animals (رجل - man, أسد - lion)</li>
+            <li>Names of countries, cities (except a few like مصر - Egypt)</li>
+            <li>Names of days, months, seasons, directions (السبت - Saturday, الشتاء - winter)</li>
+            <li>Names of languages (العربية - Arabic, الإنجليزية - English)</li>
+            <li>Parts of the body that come in pairs (يد - hand, عين - eye)</li>
+        </ul>
+
+        <div class="exercise-container">
+            <div class="exercise-box">
+                <h3>🧠 Exercise 1: Identify Gender</h3>
+                <label>1. بيت (house) → </label>
+                <input type="text" id="m1" placeholder="masculine or feminine">
+                <div class="hint" id="hint-m1" style="display:none;">Hint: Most nouns without ـة are masculine</div><br>
+
+                <label>2. قمر (moon) → </label>
+                <input type="text" id="m2" placeholder="masculine or feminine">
+                <div class="hint" id="hint-m2" style="display:none;">Hint: Natural objects are often masculine</div><br>
+
+                <label>3. معلم (male teacher) → </label>
+                <input type="text" id="m3" placeholder="masculine or feminine">
+                <div class="hint" id="hint-m3" style="display:none;">Hint: Male professions are masculine</div><br>
+
+                <button onclick="checkMasculine()">Check Answers</button>
+                <button onclick="showHints('m')">Show Hints</button>
+                <button onclick="resetMasculine()">Reset</button>
+                <div class="progress-bar">
+                    <div class="progress" id="progress-m"></div>
+                </div>
+                <div class="answer" id="masculineAns"></div>
+            </div>
+
+            <div class="exercise-box">
+                <h3>🧠 Exercise 2: Categorize Nouns</h3>
+                <p>Drag each word to the correct gender category:</p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div id="masculine-words" style="border: 1px dashed gold; min-height: 100px; padding: 10px;">
+                        <h4>Masculine</h4>
+                    </div>
+                    <div id="feminine-words" style="border: 1px dashed gold; min-height: 100px; padding: 10px;">
+                        <h4>Feminine</h4>
+                    </div>
+                </div>
+                <div id="word-bank" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+                    <span class="draggable" draggable="true" data-gender="masculine">باب (door)</span>
+                    <span class="draggable" draggable="true" data-gender="feminine">شجرة (tree)</span>
+                    <span class="draggable" draggable="true" data-gender="masculine">سوق (market)</span>
+                    <span class="draggable" draggable="true" data-gender="feminine">وردة (flower)</span>
+                    <span class="draggable" draggable="true" data-gender="masculine">قلم (pen)</span>
+                    <span class="draggable" draggable="true" data-gender="feminine">مدينة (city)</span>
+                </div>
+                <button onclick="checkDragExercise()" style="margin-top: 15px;">Check Answers</button>
+                <button onclick="resetDragExercise()">Reset</button>
+                <div class="answer" id="dragAns"></div>
+            </div>
+        </div>
+
+        <a href="#home" class="top-link">⬆️ Back to Top</a>
+    </div>
+
+    <!-- Feminine Section -->
+    <div class="section" id="feminine">
+        <h2>👩 Feminine Gender (المؤنث)</h2>
+        <p>Feminine nouns in Arabic can be recognized through specific markers or by meaning.</p>
+
+        <h3>Characteristics of Feminine Nouns:</h3>
+        <ul>
+            <li><strong>ـة (تاء مربوطة)</strong>: Most feminine nouns end with this (سيارة - car, مدرسة - school)</li>
+            <li><strong>ألف مقصورة (ـى)</strong>: Some feminine names end with this (ليلى - Layla, سلمى - Salma)</li>
+            <li><strong>ألف ممدودة (ـاء)</strong>: Some feminine nouns end with this (حمراء - red [fem.], صحراء -
+                desert)</li>
+            <li>Names of female persons and animals (امرأة - woman, بقرة - cow)</li>
+            <li>Certain body parts (رأس - head, نفس - soul)</li>
+            <li>Some geographical names (مصر - Egypt, مكة - Mecca)</li>
+        </ul>
+
+        <div class="exercise-container">
+            <div class="exercise-box">
+                <h3>🧠 Exercise 1: Identify Gender</h3>
+                <label>1. شمس (sun) → </label>
+                <input type="text" id="f1" placeholder="masculine or feminine">
+                <div class="hint" id="hint-f1" style="display:none;">Hint: Some feminine nouns don't end with ـة</div>
+                <br>
+
+                <label>2. بنت (girl) → </label>
+                <input type="text" id="f2" placeholder="masculine or feminine">
+                <div class="hint" id="hint-f2" style="display:none;">Hint: Female persons are feminine</div><br>
+
+                <label>3. حديقة (garden) → </label>
+                <input type="text" id="f3" placeholder="masculine or feminine">
+                <div class="hint" id="hint-f3" style="display:none;">Hint: Look for the تاء مربوطة ending</div><br>
+
+                <button onclick="checkFeminine()">Check Answers</button>
+                <button onclick="showHints('f')">Show Hints</button>
+                <button onclick="resetFeminine()">Reset</button>
+                <div class="progress-bar">
+                    <div class="progress" id="progress-f"></div>
+                </div>
+                <div class="answer" id="feminineAns"></div>
+            </div>
+
+            <div class="exercise-box">
+                <h3>🧠 Exercise 2: Find the Feminine</h3>
+                <p>Click on all the feminine nouns:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px;">
+                    <button class="word-btn" data-gender="masculine">كتاب</button>
+                    <button class="word-btn" data-gender="feminine">سيارة</button>
+                    <button class="word-btn" data-gender="masculine">رجل</button>
+                    <button class="word-btn" data-gender="feminine">مدرسة</button>
+                    <button class="word-btn" data-gender="feminine">شمس</button>
+                    <button class="word-btn" data-gender="masculine">بحر</button>
+                    <button class="word-btn" data-gender="feminine">ساعة</button>
+                    <button class="word-btn" data-gender="masculine">جبل</button>
+                </div>
+                <div style="margin-top: 15px;">
+                    <p>Selected: <span id="selected-words">None</span></p>
+                    <p>Score: <span id="click-score">0</span>/0</p>
+                </div>
+                <button onclick="checkClickExercise()">Check Answers</button>
+                <button onclick="resetClickExercise()">Reset</button>
+                <div class="answer" id="clickAns"></div>
+            </div>
+        </div>
+
+        <a href="#home" class="top-link">⬆️ Back to Top</a>
+    </div>
+
+    <!-- Exceptions Section -->
+    <div class="section" id="exceptions">
+        <h2>⚠️ Gender Exceptions</h2>
+        <p>Some nouns don't follow the regular rules for gender. Here are important exceptions to remember:</p>
+
+        <h3>1. Feminine Nouns Without ـة (تاء مربوطة)</h3>
+        <p>These nouns are feminine despite not having the typical feminine ending:</p>
+        <div class="irregular-list">
+            <ul>
+                <li>أرض (earth)</li>
+                <li>شمس (sun)</li>
+                <li>نار (fire)</li>
+                <li>ريح (wind)</li>
+                <li>دار (house)</li>
+                <li>نفس (soul)</li>
+                <li>يد (hand)</li>
+                <li>رأس (head)</li>
+                <li>عين (eye)</li>
+                <li>أم (mother)</li>
+            </ul>
+        </div>
+
+        <h3>2. Masculine Nouns With ـة</h3>
+        <p>These rare nouns are masculine despite ending with ـة:</p>
+        <ul>
+            <li>خليفة (caliph)</li>
+            <li>معاوية (Muawiya - male name)</li>
+            <li>حمزة (Hamza - male name)</li>
+            <li>طلحة (Talha - male name)</li>
+        </ul>
+
+        <h3>🧠 Memory Game</h3>
+        <p>Match the noun with its correct gender:</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <p><strong>Words</strong></p>
+                <ul>
+                    <li>شمس</li>
+                    <li>كتاب</li>
+                    <li>أرض</li>
+                    <li>خليفة</li>
+                    <li>نار</li>
+                    <li>حمزة</li>
+                </ul>
+            </div>
+            <div>
+                <p><strong>Genders</strong></p>
+                <ul>
+                    <li>Feminine</li>
+                    <li>Masculine</li>
+                    <li>Feminine</li>
+                    <li>Masculine</li>
+                    <li>Feminine</li>
+                    <li>Masculine</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="#home" class="top-link">⬆️ Back to Top</a>
+    </div>
+
+    <!-- Conversion Section -->
+    <div class="section" id="conversion">
+        <h2>🔄 Masculine to Feminine Conversion</h2>
+        <p>To convert a masculine noun or adjective to feminine, follow these common rules:</p>
+        <ul>
+            <li><strong>Add ة (تاء مربوطة)</strong> to the end of the masculine noun/adjective.</li>
+            <li><strong>Alif Maqsoora (ـى)</strong>: Often appears in feminine names like ليلى. It's a form of "yaa"
+                written as an alif.</li>
+            <li><strong>Alif Mamdooda (ـاء)</strong>: Appears in some feminine adjectives or nouns like صحراء (desert).
+            </li>
+        </ul>
+
+        <h3>Examples:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Masculine</th>
+                    <th>Feminine</th>
+                    <th>Translation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>معلم</td>
+                    <td>معلمة</td>
+                    <td>Teacher</td>
+                </tr>
+                <tr>
+                    <td>طالب</td>
+                    <td>طالبة</td>
+                    <td>Student</td>
+                </tr>
+                <tr>
+                    <td>جميل</td>
+                    <td>جميلة</td>
+                    <td>Beautiful</td>
+                </tr>
+                <tr>
+                    <td>صغير</td>
+                    <td>صغيرة</td>
+                    <td>Small</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="exercise-box">
+            <h3>🧠 Exercise: Convert Masculine to Feminine</h3>
+            <p>Type the feminine form using "ـة" ending:</p>
+            <label>1. معلم → </label>
+            <input type="text" id="conv1" placeholder="...">
+            <label>2. جديد → </label>
+            <input type="text" id="conv2" placeholder="...">
+            <label>3. طويل → </label>
+            <input type="text" id="conv3" placeholder="...">
+            <button onclick="checkConversion()">Check Answers</button>
+            <button onclick="resetConversion()">Reset</button>
+            <div class="answer" id="conversionAns"></div>
+        </div>
+
+        <a href="#home" class="top-link">⬆️ Back to Top</a>
+    </div>
+
+    <!-- Practice Section Placeholder -->
+    <div class="section" id="practice">
+        <h2>✍️ Additional Practice Coming Soon</h2>
+        <p>Stay tuned for advanced exercises and downloadable resources.</p>
+        <a href="Arabic_Gender_Grammar_Guide.pdf" download class="top-link">📄 Download PDF Version</a>
+        <a href="#home" class="top-link">⬆️ Back to Top</a>
+    </div>
+
+    <!-- Scripts here (drag and check functionality) -->
+    <script>
+        // Placeholder for all check/reset functions, event listeners etc.
+    </script>
